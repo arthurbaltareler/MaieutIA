@@ -4,7 +4,7 @@
 
 > Nome inspirado na maiêutica socrática: o assistente não entrega respostas prontas, ajuda o aluno a "dar à luz" a solução que ele já tem em potencial, por meio de perguntas e dicas guiadas — nunca revelando o código-fonte.
 
-📄 Veja o [Project Charter e a Avaliação TELOS completos na Wiki](../../wikis/home) deste repositório.
+📄 Veja o [Project Charter e a Avaliação TELOS completos na Wiki](../../wikis/Project-Charter-%E2%80%94-Maieut-IA) deste repositório.
 
 ---
 
@@ -12,9 +12,9 @@
 
 | Nome Completo | Usuário GitLab | E-mail | Papel Principal na Equipe |
 | :--- | :--- | :--- | :--- |
-| Arthur Baltar Eler | `@usuario1` | `arthur@cefetmg.br` | Scrum Master |
-| Bianca Barros | `@usuario2` | `bianca@cefetmg.br` | Product Owner & Engenharia de Prompt |
-| João Carlos | `@usuario3` | `joao@cefetmg.br` | Tech Lead / Dev |
+| Arthur Baltar Eler | `@ArchieBaltar` | `arthur.cefet.engcomputacao@gmail.com` | Scrum Master |
+| Bianca Barros | `@biancaB` | `bianca@cefetmg.br` | Product Owner & Engenharia de Prompt |
+| João Carlos | `@joaocarlos.fm` | `joao@cefetmg.br` | Tech Lead / Dev |
 
 ## Stack Tecnológica
 
