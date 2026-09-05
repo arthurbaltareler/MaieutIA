@@ -13,8 +13,8 @@
 | Nome Completo | Usuário GitLab | E-mail | Papel Principal na Equipe |
 | :--- | :--- | :--- | :--- |
 | Arthur Baltar Eler | `@ArchieBaltar` | `arthur.cefet.engcomputacao@gmail.com` | Scrum Master |
-| Bianca Barros | `@biancaB` | `bianca@cefetmg.br` | Product Owner & Engenharia de Prompt |
-| João Carlos | `@joaocarlos.fm` | `joao@cefetmg.br` | Tech Lead / Dev |
+| Bianca Barros | `@biancaB` | `bianca---@gmail.com` | Product Owner & Engenharia de Prompt |
+| João Carlos | `@joaocarlos.fm` | `Joaocarlos12349@gmail.com` | Tech Lead / Dev |
 
 ## Stack Tecnológica
 
