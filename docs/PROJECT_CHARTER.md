@@ -1,3 +1,5 @@
+# Project Charter — Maieut-IA
+
 ## 1. Nome do Projeto
 **Maieut-IA — Assistente Socrático de Maratona de Programação**
 
