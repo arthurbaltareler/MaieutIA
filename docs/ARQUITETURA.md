@@ -33,3 +33,82 @@ sequenceDiagram
 
     Interface-->>Aluno: Resposta completa
 ```
+
+## Diagrama de Classes
+
+O diagrama de classes representa a estrutura estática planejada para o Maieut-IA, destacando as classes responsáveis pela interface, pelo processamento lógico das perguntas e pela integração com a API de inteligência artificial.
+
+```mermaid
+classDiagram
+
+    %% =========================
+    %% INTERFACE
+    %% =========================
+
+    class InterfaceChat {
+        +iniciar()
+        +receber_pergunta() String
+        +exibir_resposta(resposta)
+        +exibir_erro(mensagem)
+    }
+
+    %% =========================
+    %% CORE LÓGICO
+    %% =========================
+
+    class Assistente {
+        -parser: Parser
+        -cliente_api: ClienteAPI
+        -processador: ProcessadorResposta
+        +processar_pergunta(pergunta) Resposta
+    }
+
+    class Parser {
+        +validar(pergunta) Boolean
+        +processar(pergunta) String
+        +montar_prompt(pergunta) String
+    }
+
+    class ProcessadorResposta {
+        +processar(resposta) String
+        +preparar_exibicao(resposta)
+    }
+
+    %% =========================
+    %% INTEGRAÇÃO COM API
+    %% =========================
+
+    class ClienteAPI {
+        -api_key: String
+        -modelo: String
+        -api_url: String
+        +enviar_prompt(prompt) String
+        +tratar_erro(erro)
+    }
+
+    %% =========================
+    %% OBJETO DE RESPOSTA
+    %% =========================
+
+    class Resposta {
+        -conteudo: String
+        -sucesso: Boolean
+        -erro: String
+        +obter_conteudo() String
+        +foi_bem_sucedida() Boolean
+    }
+
+    %% =========================
+    %% RELACIONAMENTOS
+    %% =========================
+
+    InterfaceChat --> Assistente : utiliza
+
+    Assistente *-- Parser : possui
+    Assistente *-- ClienteAPI : utiliza
+    Assistente *-- ProcessadorResposta : possui
+
+    Assistente --> Resposta : gera
+
+    Parser --> ClienteAPI : prepara chamada
+```
