@@ -65,35 +65,51 @@ Critério de aceitação: informações como chaves de API deverão ser fornecid
 
 ## DIAGRAMA DE CASOS DE USO
 
-O diagrama a seguir apresenta as principais funcionalidades do Maieut-IA disponíveis ao aluno, conforme os Requisitos Funcionais definidos anteriormente.
-
 ```mermaid
 flowchart LR
-    Aluno(("Aluno"))
+
+    Aluno(("👤<br/>Aluno"))
 
     subgraph MaieutIA["Maieut-IA"]
-        direction TB
+        direction LR
 
-        UC01(["Acessar interface Web<br/>(UC01 · RF01)"])
-        UC02(["Submeter problema ou código<br/>(UC02 · RF02)"])
-        UC03(["Visualizar diálogo da sessão<br/>(UC03 · RF03)"])
-        UC04(["Receber identificação da classe do algoritmo<br/>e análise de complexidade<br/>(UC04 · RF04)"])
-        UC05(["Receber orientação socrática<br/>por meio de dicas e perguntas<br/>(UC05 · RF05)"])
+        subgraph COL1[" "]
+            direction TB
+            UC1(["Acessar interface Web<br/>(UC01 · RF01)"])
+            UC2(["Submeter problema/código<br/>(UC02 · RF02)"])
+        end
+
+        subgraph COL2[" "]
+            direction TB
+            UC4(["Receber classificação do<br/>algoritmo<br/>e análise de complexidade<br/>(UC04 · RF04)"])
+            UC5(["Receber condução socrática<br/>(dicas e perguntas<br/>orientadoras)<br/>(UC05 · RF05)"])
+        end
+
+        subgraph COL3[" "]
+            direction TB
+            UC3(["Visualizar diálogo da sessão<br/>(UC03 · RF03)"])
+        end
     end
 
-    Aluno --- UC01
-    Aluno --- UC02
-    Aluno --- UC03
-    Aluno --- UC04
-    Aluno --- UC05
+    Aluno --- UC1
+    Aluno --- UC2
+    Aluno --- UC4
+    Aluno --- UC5
+    Aluno --- UC3
+
+    UC2 -. "«include»" .-> UC4
+    UC2 -. "«include»" .-> UC5
+
+    UC4 -. "«extend»" .-> UC3
+    UC5 -. "«extend»" .-> UC3
 
     classDef actor fill:#ffffff,stroke:#222,stroke-width:2px
     classDef usecase fill:#ffffff,stroke:#222,stroke-width:1.5px
 
-    Aluno:::actor
-    UC01:::usecase
-    UC02:::usecase
-    UC03:::usecase
-    UC04:::usecase
-    UC05:::usecase
+    class Aluno actor
+    class UC1,UC2,UC3,UC4,UC5 usecase
+
+    style COL1 fill:none,stroke:none
+    style COL2 fill:none,stroke:none
+    style COL3 fill:none,stroke:none
 ```
