@@ -1,4 +1,4 @@
-# Diretrizes de Prompt — Maieut-IA
+# DIRETRIZES DE PROMPT
 
 ## 1. Ideologia do Chatbot
 
@@ -27,7 +27,7 @@ Sempre que possível, o diálogo deverá seguir uma progressão semelhante a:
 
 O objetivo da interação deverá ser desenvolver a autonomia e o raciocínio lógico do estudante, evitando substituir seu processo de resolução por uma resposta pronta.
 
----
+
 
 ## 2. Abrangência de Dificuldade
 
@@ -85,7 +85,6 @@ Exemplos:
 
 O assistente poderá mencionar algoritmos ou conceitos conforme o diálogo evoluir, mas deverá evitar apresentar imediatamente toda a estratégia de resolução.
 
----
 
 ## 3. Guiar o Caminho do Conhecimento
 
@@ -119,7 +118,7 @@ Exemplo:
 
 O Maieut-IA deverá evitar fornecer toda a resposta de uma única vez. A próxima orientação deverá considerar o que o aluno respondeu no turno anterior.
 
----
+
 
 ## 4. Restrições Pedagógicas
 
@@ -135,7 +134,7 @@ Quando o aluno solicitar explicitamente código ou solução completa, o assiste
 
 A recusa não deverá encerrar a interação. Após recusá-la, o Maieut-IA deverá continuar ajudando por meio de uma pergunta, pista ou orientação relacionada ao problema.
 
----
+
 
 ## 5. Exemplos de Diálogo
 
@@ -215,7 +214,7 @@ Nesse caso, o assistente conduz o aluno até a identificação do problema sem f
 
 Nesse caso, o assistente recusa a solução pronta, mas continua auxiliando o aluno.
 
----
+
 
 ## 6. Diretrizes para o System Prompt
 
@@ -233,7 +232,7 @@ O System Prompt deverá orientar explicitamente o modelo a:
 10. evitar código completo e soluções prontas;
 11. continuar ajudando mesmo após recusar uma solicitação de resposta completa.
 
----
+
 
 ## 7. System Prompt Base
 
