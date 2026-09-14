@@ -61,3 +61,39 @@ Critério de aceitação: após uma requisição malsucedida, uma nova pergunta 
 ## RNF07 - Configuração segura do ambiente
 As configurações sensíveis ou específicas do ambiente de execução deverão ser mantidas fora do código-fonte principal, permitindo sua alteração sem modificar a implementação da aplicação.
 Critério de aceitação: informações como chaves de API deverão ser fornecidas por variáveis de ambiente ou arquivo de configuração local não versionado, como .env, devidamente incluído nas regras de exclusão do controle de versão.
+
+
+## DIAGRAMA DE CASOS DE USO
+
+O diagrama a seguir apresenta as principais funcionalidades do Maieut-IA disponíveis ao aluno, conforme os Requisitos Funcionais definidos anteriormente.
+
+```mermaid
+flowchart LR
+    Aluno(("Aluno"))
+
+    subgraph MaieutIA["Maieut-IA"]
+        direction TB
+
+        UC01(["Acessar interface Web<br/>(UC01 · RF01)"])
+        UC02(["Submeter problema ou código<br/>(UC02 · RF02)"])
+        UC03(["Visualizar diálogo da sessão<br/>(UC03 · RF03)"])
+        UC04(["Receber identificação da classe do algoritmo<br/>e análise de complexidade<br/>(UC04 · RF04)"])
+        UC05(["Receber orientação socrática<br/>por meio de dicas e perguntas<br/>(UC05 · RF05)"])
+    end
+
+    Aluno --- UC01
+    Aluno --- UC02
+    Aluno --- UC03
+    Aluno --- UC04
+    Aluno --- UC05
+
+    classDef actor fill:#ffffff,stroke:#222,stroke-width:2px
+    classDef usecase fill:#ffffff,stroke:#222,stroke-width:1.5px
+
+    Aluno:::actor
+    UC01:::usecase
+    UC02:::usecase
+    UC03:::usecase
+    UC04:::usecase
+    UC05:::usecase
+```
