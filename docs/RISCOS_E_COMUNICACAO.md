@@ -37,7 +37,7 @@
 | R01 | Técnico | Latência elevada ou rate limit da API | Alta | Baixo | Médio | João | Mitigar | Em monitoramento | 19/10/2026 |
 | R02 | Técnico | Estouro de cota/limite de tokens | Média | Médio | Médio | João | Mitigar | Em monitoramento | 19/10/2026 |
 | R03 | Técnico | Perda de acesso à chave de API (acesso concentrado em um integrante) | Baixa | Alto | Médio | João | Mitigar | Em monitoramento | 19/10/2026 |
-| R04 | Técnico | Desligamento do `gpt-3.5-turbo` em 23/10/2026 (data oficial da OpenAI) | Alta | Médio | Alto | João | Aceitar (ativo) | Aceito, com plano | 19/10/2026 |
+| R04 | Técnico | Desligamento do `gpt-3.5-turbo` na data indicada de 23/10/2026 (confirmar em fonte oficial) | Alta | Médio | Alto | João | Mitigar (preparar migração) | Plano documentado; modelo proposto, aprovação pendente | 19/10/2026 |
 | R05 | Pedagógico | Alucinação: informação algorítmica incorreta ou resposta a enunciado ambíguo sem reconhecer incerteza | Média | Alto | Alto | Bianca | Mitigar | Em monitoramento | 19/10/2026 |
 | R06 | Pedagógico | Assistente entrega a solução completa quando pressionado (pedido direto ou prompt injection) | Média | Alto | Alto | Bianca | Mitigar | Em monitoramento | 19/10/2026 |
 | R07 | Escopo/Cronograma | Sobrecarga ou indisponibilidade de membros; conhecimento técnico concentrado (Fator Ônibus) | Alta | Alto | Crítico | Arthur | Mitigar | Aberto | 19/10/2026 |
@@ -61,10 +61,10 @@
 - **Mitigação:** segunda chave vinculada a outro integrante; chaves apenas em variável de ambiente ou CI/CD Variables mascaradas, nunca no repositório (RNF02, RNF03, RNF07).
 - **Contingência:** ativar a chave de backup; se houver vazamento, **revogar a chave imediatamente** antes de qualquer limpeza do histórico do Git.
 
-**R04 — Desligamento do `gpt-3.5-turbo` (23/10/2026)**
-- **Gatilho:** erro de "modelo não encontrado" na chamada ou chegada da data de 23/10/2026.
-- **Mitigação:** decisão de **aceitação ativa**, registrada no Charter; plano de migração com modelo substituto definido e pontos do código mapeados (Issue #17); confirmar a compatibilidade entre endpoint e modelo durante os testes do motor de diálogo.
-- **Contingência:** trocar a referência de modelo no código e reexecutar a bateria de testes para confirmar que o comportamento socrático se mantém.
+**R04 — Possível desligamento do `gpt-3.5-turbo` (data indicada: 23/10/2026; confirmar em fonte oficial)**
+- **Gatilho:** erro de "modelo não encontrado" na chamada ou aproximação da data indicada de 23/10/2026, após confirmação em fonte oficial.
+- **Mitigação:** o plano está documentado em `docs/MIGRACAO_MODELO.md`. `gpt-4o-mini` é o modelo proposto, com aprovação da equipe pendente; validar disponibilidade, custo, latência, endpoint e comportamento socrático antes da adoção. O mapeamento atual registra `gpt-4.1-mini` no motor e nos testes de diálogo/prompt, e `gpt-4o-mini` no teste isolado da API.
+- **Contingência:** retornar à última configuração funcional que use um modelo ainda disponível; não depender de `gpt-3.5-turbo`. Se necessário, selecionar outro modelo compatível e repetir a bateria de testes.
 
 **R05 — Alucinação e resposta sem reconhecer incerteza**
 - **Gatilho:** resposta com informação algorítmica incorreta em qualquer caso registrado em `CASOS_DE_TESTE_PROMPT.md`, ou relatada por um usuário.
@@ -97,7 +97,6 @@
 | ID | Oportunidade | P | I | Resposta | Dono |
 |---|---|---|---|---|---|
 | O01 | Surgimento de modelo mais barato ou mais capaz durante o semestre | Média | Médio | **Explorar:** o plano de migração (Issue #17) permite adotá-lo sem retrabalho grande | João |
-
 
 ## 4. Limites comunicados ao usuário e protocolo de resposta inadequada
 
