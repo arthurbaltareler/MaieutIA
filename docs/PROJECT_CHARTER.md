@@ -41,7 +41,7 @@ Desenvolver e integrar, via API da OpenAI, um Assistente Socrático:
 ## 6. Restrições
 - Equipe de 3 pessoas.
 - Prazo: 29/08/2026 – 30/11/2026 (93 dias), divididos em 4 Milestones.
-- Custo: R$ 0,00 a princípio, via acesso do João ao modelo GPT-3.5. O `gpt-3.5-turbo` tem desligamento programado pela OpenAI para 23/10/2026 — dentro da janela do projeto —, mas a equipe optou por aceitar esse risco (ver Risco 5) em vez de migrar preventivamente, dado o custo zero.
+- Custo: inicialmente estimado em R$ 0,00, com base no acesso do João à API. O planejamento original considerava o `gpt-3.5-turbo`, mas a issue de migração passou a preparar uma substituição antes da data de desligamento indicada (23/10/2026). O modelo proposto é `gpt-4o-mini`; a aprovação final e a validação de custo/disponibilidade precisam ser registradas pela equipe em `docs/MIGRACAO_MODELO.md`.
 
 ## 7. Riscos Iniciais
 
@@ -49,7 +49,7 @@ Desenvolver e integrar, via API da OpenAI, um Assistente Socrático:
    *Mitigação:* criar uma bateria de testes automatizados do System Prompt (ex: 10-15 prompts adversariais que tentam "forçar" a resposta pronta), rodada a cada alteração do prompt, verificando se a resposta contém código completo. Revisão do prompt pelo Tech Lead antes de qualquer merge que o altere.
 
 2. **Estouro de cota/limite de tokens** da API da OpenAI.
-   *Mitigação:* monitorar consumo semanalmente no painel da OpenAI, definir um `max_tokens` de saída fixo nas chamadas da API, e usar o modelo GPT-3.5 (mais barato) como padrão, reservando modelos mais caros só para testes pontuais.
+   *Mitigação:* monitorar consumo semanalmente no painel da OpenAI, definir um limite de saída adequado nas chamadas da API e adotar um modelo de custo compatível com o orçamento, após comparar os candidatos e registrar a decisão em `docs/MIGRACAO_MODELO.md`.
 
 3. **Engenharia de prompt consumir muito mais tempo** do que estimado.
    *Mitigação:* reservar buffer de tempo explícito no Milestone 2 (dedicado à engenharia de prompt), e versionar cada iteração do prompt na Wiki com data e resultado do teste — evitando retrabalho por perda de histórico.
@@ -57,8 +57,8 @@ Desenvolver e integrar, via API da OpenAI, um Assistente Socrático:
 4. **Dependência de acesso individual à API**, sem redundância na equipe.
    *Mitigação:* criar, até o fim do Sprint 1, uma segunda chave de API vinculada a outro integrante da equipe (backup), armazenada como variável de ambiente (nunca commitada no repositório) e documentada na Wiki para acesso de toda a equipe em caso de indisponibilidade da conta do João.
 
-5. **Obsolescência programada do modelo**: o `gpt-3.5-turbo` será desligado pela OpenAI em 23/10/2026, antes do fim do projeto (30/11/2026).
-   *Resposta ao risco: Aceitação.* A equipe optou por manter o GPT-3.5 como padrão pelo custo zero, assumindo o risco da migração forçada. *Mitigação:* quando o desligamento ocorrer, migrar para a linha mais barata disponível na época (ex: `gpt-4o-mini` ou equivalente futuro) e ajustar as dependências de código afetadas pela troca de modelo.
+5. **Obsolescência programada do modelo**: a issue registra 23/10/2026 como data prevista para o desligamento de `gpt-3.5-turbo`; confirmar a data na documentação oficial do provedor antes de tratá-la como confirmada. O projeto termina em 30/11/2026.
+   *Registro histórico:* a resposta inicial foi aceitar o risco de manter o GPT-3.5 como padrão, considerando o custo estimado. *Tratamento atual:* a issue de migração prepara a substituição antes do desligamento. `gpt-4o-mini` está proposto, mas a decisão final depende de aprovação da equipe e de testes de disponibilidade, custo, latência e comportamento pedagógico. Consultar `docs/MIGRACAO_MODELO.md` para o plano atualizado.
 
 ## 8. Equipe e Papéis
 | Papel | Responsável |

@@ -16,7 +16,7 @@ def main():
     client = OpenAI(api_key=api_key)
 
     response = client.responses.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         input="Explique em uma frase o que é um algoritmo."
     )
 
