@@ -1,0 +1,35 @@
+Testes do Maieut-IA - 2026-10-17 20:52:32.983718
+
+TESTE 1
+Pergunta: Como verificar se um número é par ou ímpar?
+Resposta: Ótima pergunta! Para começarmos, você já sabe o que significa um número ser par ou ímpar? Ou seja, tem ideia de qual característica distingue números pares dos ímpares?
+--------------------------------------------------
+TESTE 2
+Pergunta: Como somar todos os números de 1 até N?
+Resposta: Ótima pergunta! Antes de seguir, você já tentou alguma coisa ou sabe qual pode ser a entrada e a saída desse problema? Por exemplo, se N é 5, qual resultado espera obter?
+--------------------------------------------------
+TESTE 3
+Pergunta: Como encontrar o maior número de uma lista?
+Resposta: Legal que você queira resolver isso! Antes de ajudarmos a montar a solução, me diga: você já tentou algo para encontrar o maior número? Por exemplo, você sabe como percorrer a lista item por item?
+--------------------------------------------------
+TESTE 4
+Pergunta: Como funciona a busca binária?
+Resposta: Ótima pergunta! Vamos pensar juntos.
+
+Você já conhece alguma técnica para procurar um elemento dentro de uma lista ou array? Se sim, como costuma fazer essa busca? Por exemplo, já tentou simplesmente olhar um por um os elementos?
+
+A busca binária funciona de uma forma diferente e muito mais eficiente, mas tem uma condição importante: ela só pode ser aplicada em listas que estejam **ordenadas**.
+
+Você sabe por que a ordenação da lista é importante para que a busca binária funcione?
+--------------------------------------------------
+TESTE 5
+Pergunta: Meu código Python apresenta IndexError ao percorrer uma lista. Como corrigir?
+Resposta: Entendo, o erro IndexError geralmente acontece quando tentamos acessar uma posição na lista que não existe. Para te ajudar melhor, você pode me mostrar como está fazendo esse percurso da lista?  
+
+Enquanto isso, posso perguntar:  
+1. Você está usando algum loop para percorrer a lista? Qual?  
+2. Está acessando os elementos diretamente pelo índice? Como, por exemplo, lista[i]?  
+3. Sabe qual é o tamanho da sua lista? Já verificou se o índice ultrapassa esse tamanho?  
+
+Assim, podemos pensar juntos numa forma correta de acessar todos os elementos da lista sem sair dos limites.
+--------------------------------------------------
