@@ -98,9 +98,6 @@
 |---|---|---|---|---|---|
 | O01 | Surgimento de modelo mais barato ou mais capaz durante o semestre | Média | Médio | **Explorar:** o plano de migração (Issue #17) permite adotá-lo sem retrabalho grande | João |
 
-### Riscos que se confirmaram na Sprint 2
-
-> [PREENCHER ao fechar a sprint: quais riscos viraram problema, quando, e qual resposta foi aplicada.]
 
 ## 4. Limites comunicados ao usuário e protocolo de resposta inadequada
 
