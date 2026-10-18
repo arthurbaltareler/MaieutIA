@@ -98,10 +98,6 @@
 |---|---|---|---|---|---|
 | O01 | Surgimento de modelo mais barato ou mais capaz durante o semestre | Média | Médio | **Explorar:** o plano de migração (Issue #17) permite adotá-lo sem retrabalho grande | João |
 
-### Riscos que se confirmaram na Sprint 2
-
-> [PREENCHER ao fechar a sprint: quais riscos viraram problema, quando, e qual resposta foi aplicada.]
-
 ## 4. Limites comunicados ao usuário e protocolo de resposta inadequada
 
 **Aviso exibido na interface (texto proposto):**
@@ -148,27 +144,14 @@
 |---|---|---|---|---|
 | Decisões de escopo, requisitos e riscos | Equipe | Issue, MR ou ADR no GitLab | Sempre que ocorrerem | Obrigatório |
 | Alertas rápidos (bloqueios, indisponibilidade) | Equipe | Chat | Imediato | Resumo na Issue em até 24 h |
-| Alinhamento de Sprint | Equipe | Reunião curta | Semanal | Ata na seção 8 |
+| Alinhamento de Sprint | Equipe | Issues e comentários no Board (assíncrono) | A cada Milestone | Comentário na Issue do Milestone |
 | Progresso do Milestone | Professor | Board, Issues e Wiki | Contínuo | Repositório |
 
-**Regras:** o GitLab é a fonte do registro; o chat é só para alertas e nunca recebe credenciais ou dados pessoais; ADRs ficam em `docs/adr/` (a ser criada junto com o `CHANGELOG.md`).
+**Regras:** o GitLab é a fonte do registro; o chat é só para alertas e nunca recebe credenciais ou dados pessoais; ADRs ficam em `docs/adr/` .
 
-## 8. Atas e alinhamentos da Sprint 2
-
-### Pontos em aberto para decidir e registrar na próxima ata
-
-- Mover as Issues #15, #16 e #19 para o Milestone 3 (a rubrica do M2 não exige essas entregas).
-- Alinhar a estrutura de pastas com a árvore do enunciado (`src/prompts/`, `src/core/`, `src/tests/`) ou documentar o mapeamento no README.
-- Definir a política sobre pseudocódigo e trechos de código nas respostas do assistente.
-
-### Registro de atas
-
-| Nº | Data | Participantes | Tema | Decisões | Ações (responsável / prazo) | Vínculo (Issue ou MR) |
-|---|---|---|---|---|---|---|
-| 01 |  |  |  |  |  |  |
-
-## 9. Histórico de revisões
+## 8. Histórico de revisões
 
 | Data | Mudança | Responsável |
 |---|---|---|
 | 14/10/2026 | Criação do documento a partir dos riscos do Charter e dos novos riscos do Milestone 2 | Arthur |
+| 18/10/2026 | Seção de atas removida; plano de comunicação passa a ser assíncrono | Arthur |
