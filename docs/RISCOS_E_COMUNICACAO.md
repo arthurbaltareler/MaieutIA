@@ -150,15 +150,14 @@
 
 **Regras:** o GitLab é a fonte do registro; o chat é só para alertas e nunca recebe credenciais ou dados pessoais; ADRs ficam em `docs/adr/` (a ser criada junto com o `CHANGELOG.md`).
 
-## 8. Atas e alinhamentos da Sprint 2
+## 8. Alinhamentos da Sprint 2
 
-### Pontos em aberto para decidir e registrar na próxima ata
+### Pontos em aberto para decidir e registrar
 
-- Mover as Issues #15, #16 e #19 para o Milestone 3 (a rubrica do M2 não exige essas entregas).
 - Alinhar a estrutura de pastas com a árvore do enunciado (`src/prompts/`, `src/core/`, `src/tests/`) ou documentar o mapeamento no README.
 - Definir a política sobre pseudocódigo e trechos de código nas respostas do assistente.
 
-### Registro de atas
+### Registro
 
 | Nº | Data | Participantes | Tema | Decisões | Ações (responsável / prazo) | Vínculo (Issue ou MR) |
 |---|---|---|---|---|---|---|
