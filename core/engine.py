@@ -1,4 +1,3 @@
-
 import os
 from pathlib import Path
 
@@ -84,3 +83,40 @@ class DialogueEngine:
     def limpar_historico(self):
         """Começa uma nova conversa sem perder o System Prompt."""
         self.messages.clear()
+
+if __name__ == "__main__":
+    import sys
+
+    from openai import APIConnectionError, RateLimitError
+
+    # Uso: python core/engine.py [caminho do prompt]
+    prompt = sys.argv[1] if len(sys.argv) > 1 else None
+    try:
+        motor = DialogueEngine(prompt_path=prompt)
+    except (ValueError, OSError) as erro:
+        raise SystemExit(f"Não foi possível iniciar: {erro}")
+
+    print("Maieut-IA (digite 'novo' para reiniciar ou 'sair' para encerrar)")
+    while True:
+        try:
+            pergunta = input("\nAluno: ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print()
+            break
+        if pergunta.lower() == "sair":
+            break
+        if pergunta.lower() == "novo":
+            motor.limpar_historico()
+            print("Nova conversa iniciada.")
+            continue
+        if not pergunta:
+            continue
+        try:
+            print(f"\nMaieut-IA: {motor.responder(pergunta)}")
+        except RateLimitError:
+            print("\nO serviço está temporariamente limitado. Aguarde um pouco e tente novamente.")
+        except APIConnectionError:
+            print("\nNão foi possível acessar o serviço agora. Verifique a conexão e tente novamente.")
+        except Exception as erro:
+            print(f"\nErro: {type(erro).__name__}. Tente novamente.")
+            
