@@ -39,7 +39,7 @@
 | R03 | Técnico | Perda de acesso à chave de API (acesso concentrado em um integrante) | Baixa | Alto | Médio | João | Mitigar | Em monitoramento | 19/10/2026 |
 | R04 | Técnico | Desligamento do `gpt-3.5-turbo` na data indicada de 23/10/2026 (confirmar em fonte oficial) | Alta | Médio | Alto | João | Mitigar (preparar migração) | Plano documentado; modelo proposto, aprovação pendente | 19/10/2026 |
 | R05 | Pedagógico | Alucinação: informação algorítmica incorreta ou resposta a enunciado ambíguo sem reconhecer incerteza | Média | Alto | Alto | Bianca | Mitigar | Em monitoramento | 19/10/2026 |
-| R06 | Pedagógico | Assistente entrega a solução completa quando pressionado (pedido direto ou prompt injection) | Média | Alto | Alto | Bianca | Mitigar | Em monitoramento | 19/10/2026 |
+| R06 | Pedagógico | Assistente entrega a solução completa quando pressionado (pedido direto ou prompt injection) | Média | Alto | Alto | Bianca | Mitigar | Ocorreu nos testes com o prompt v1; ajuste pendente | 19/10/2026 |
 | R07 | Escopo/Cronograma | Sobrecarga ou indisponibilidade de membros; conhecimento técnico concentrado (Fator Ônibus) | Alta | Alto | Crítico | Arthur | Mitigar | Aberto | 19/10/2026 |
 | R08 | Escopo/Cronograma | Atraso no caminho crítico do Milestone 2 | Alta | Alto | Crítico | Arthur | Mitigar | Aberto | 19/10/2026 |
 | R09 | Escopo/Cronograma | Scope Creep ou Gold Plating (pedidos informais, funcionalidades fora do MVP) | Média | Médio | Médio | Bianca | Evitar | Em monitoramento | 19/10/2026 |
