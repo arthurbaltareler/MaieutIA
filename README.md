@@ -37,7 +37,7 @@ Para mais detalhes sobre justificativa, escopo, riscos e viabilidade do projeto,
 | System Prompt versionado | `prompts/system_prompt_v1.md`; especificação completa em [`docs/SYSTEM_PROMPT.md`](docs/SYSTEM_PROMPT.md) |
 | Conversa com histórico (multi-turn) | `tests/test_dialogo.py` simula 4 turnos reenviando o histórico a cada chamada |
 | Bateria de validação (18 casos) | `tests/executar_testes.py`; resultados em [`docs/CASOS_DE_TESTE_PROMPT.md`](docs/CASOS_DE_TESTE_PROMPT.md) |
-| Motor de diálogo (`core/engine.py`) | Em integração (branch `feature/dialogue-engine`) |
+| Classe DialogueEngine (core/engine.py) | separa o System Prompt do histórico e mantém o contexto entre turnos |
 | Interface Streamlit (`app/`) | Não implementada; prevista para o Milestone 3 |
 
 ---
@@ -99,6 +99,7 @@ Rode os comandos a partir da raiz do repositório, com o ambiente virtual ativo:
 |---|---|---|
 | Testar a conexão com a API (spike) | `python spike/test_api.py` | 1 |
 | Simular uma conversa de 4 turnos com histórico | `python tests/test_dialogo.py` | 4 |
+| Conversar com o motor (histórico entre turnos) | python core/engine.py | uma por mensagem |
 | Testar o prompt com 5 perguntas (saída em `tests/resultados.txt`) | `python tests/test_system_prompt.py` | 5 |
 | Validar a estrutura da bateria sem chamar a API | `python tests/executar_testes.py --validar` | 0 |
 | Executar um caso da bateria | `python tests/executar_testes.py --caso ADV-03` | um por turno do caso |
