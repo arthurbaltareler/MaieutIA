@@ -1,0 +1,13 @@
+
+stages:
+  - validate
+
+validar-projeto:
+  stage: validate
+  image: python:3.11
+  before_script:
+    - python --version
+    - pip install --no-cache-dir -r requirements.txt
+  script:
+    - python -m compileall -q app core tests
+    - python tests/executar_testes.py --validar
