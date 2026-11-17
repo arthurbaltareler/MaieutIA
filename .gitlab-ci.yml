@@ -1,13 +1,21 @@
-
 stages:
-  - validate
+  - lint
+  - test
 
-validar-projeto:
-  stage: validate
-  image: python:3.11
-  before_script:
-    - python --version
-    - pip install --no-cache-dir -r requirements.txt
+lint:
+  stage: lint
   script:
+    - python3 --version
+    - python3 -m venv .venv
+    - . .venv/bin/activate
+    - pip install --no-cache-dir ruff
     - python -m compileall -q app core tests
+    - ruff check app core tests --select E9,F --exclude .venv
+
+test:
+  stage: test
+  script:
+    - python3 -m venv .venv
+    - . .venv/bin/activate
+    - pip install --no-cache-dir -r requirements.txt
     - python tests/executar_testes.py --validar
