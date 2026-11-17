@@ -2,7 +2,7 @@
 
 O Maieut-IA é um assistente de IA para quem treina maratona de programação (ICPC). Ele funciona como um **treinador socrático**: em vez de entregar a solução, faz perguntas e dá pistas para que **você** chegue ao algoritmo.
 
-> **Estado desta versão (Milestone 2):** a interface Web em Streamlit (`app/`) ainda não foi implementada. Por enquanto a conversa acontece pelo **terminal**, com o motor `core/engine.py`. A seção 1.B descreve a interface Web prevista e deve ser revisada quando o Milestone 3 for entregue.
+> **Estado desta versão:** a interface Web em Streamlit (`app/`) está disponível para execução local. Também é possível usar o motor pelo terminal (`core/engine.py`). Veja as instruções nas seções 1.A e 1.B.
 
 ---
 
@@ -10,18 +10,31 @@ O Maieut-IA é um assistente de IA para quem treina maratona de programação (I
 
 ### Antes de começar (uma vez só)
 
-Você precisa de Python 3.10+, do repositório clonado e de uma chave de API da OpenAI no arquivo `.env`. O passo a passo completo está no [`README.md`](../README.md#como-executar). Resumo:
+Você precisa de Python 3.10+, do repositório clonado e de uma chave de API da OpenAI no arquivo `.env`. O passo a passo completo está no [`README.md`](../README.md#como-executar). Na raiz do repositório, siga as instruções do seu sistema operacional.
+
+**Windows (PowerShell):**
+
+```powershell
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env
+```
+
+**Linux/macOS (terminal):**
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate   # Windows: py -m venv .venv ; .venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-cp .env.example .env                                  # Windows: Copy-Item .env.example .env
-# edite o .env e preencha: OPENAI_API_KEY=sua-chave-aqui
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+cp .env.example .env
 ```
+
+Depois, edite o `.env` e preencha `OPENAI_API_KEY=sua-chave-aqui`.
 
 > Nunca envie o `.env` ao repositório nem compartilhe sua chave.
 
-### 1.A Pelo terminal (versão atual)
+### 1.A Pelo terminal
 
 Na raiz do repositório, com o ambiente virtual ativo:
 
@@ -42,9 +55,17 @@ Você verá `Maieut-IA (digite 'novo' para reiniciar ou 'sair' para encerrar)` e
 
 **O histórico existe só durante a sessão.** Ao fechar o programa, nada é salvo. Se quiser guardar algo importante, copie antes de sair.
 
-### 1.B Pela interface Web (prevista — Milestone 3)
+### 1.B Pela interface Web (Streamlit)
 
-Quando a interface em Streamlit estiver pronta, esta seção deve informar o comando de execução (por exemplo `streamlit run app/<arquivo>.py`), onde digitar a mensagem, onde aparece o diálogo e como iniciar uma nova conversa. Conforme o RF03, o histórico continuará sem persistência: recarregar a página apaga a conversa.
+Na raiz do repositório, com o ambiente configurado, execute no Windows:
+
+```bash
+py -m streamlit run app/main.py
+```
+
+O Streamlit abre a aplicação no navegador. Digite o enunciado, a dúvida ou o código no campo de entrada e envie; as mensagens do aluno e as respostas aparecem na área de diálogo. O histórico é mantido durante a conversa, mas **não é salvo entre sessões**: recarregar a página apaga as mensagens anteriores.
+
+**Limitações da interface observadas no teste de 17/11/2026:** ainda não há botão de "Nova conversa"; o campo de entrada continua preenchido após o envio; o diálogo e o campo ficam em colunas separadas; e mensagens com código podem perder as quebras de linha na exibição. Evite clicar novamente enquanto aguarda uma resposta, pois isso pode duplicar o envio.
 
 ---
 
@@ -59,7 +80,7 @@ Ele segue o método socrático, com ajuda em camadas que vão ficando mais concr
 3. **Estruturas e complexidade** — que estruturas de dados usar e quanto o custo cresce (`O(N)`, `O(N log N)`, `O(V + E)`).
 4. **Casos de borda** — `N = 0`, um único elemento, valores repetidos ou negativos, overflow, grafos desconexos.
 
-Ele costuma devolver **uma pergunta principal por vez** e espera que você tente.
+O comportamento esperado é propor **uma pergunta principal por vez** e aguardar sua tentativa. Isso ainda não acontece de modo consistente: no teste de usabilidade de 17/11/2026, uma resposta trouxe cerca de sete perguntas (veja a seção 4).
 
 ### Boas perguntas para fazer
 
@@ -107,10 +128,10 @@ O Maieut-IA usa um modelo de linguagem (`gpt-4.1-mini`, da OpenAI). Isso traz li
 
 ### Comportamento pedagógico ainda imperfeito
 
-Na bateria de 18 casos com o prompt atual (v1), executada duas vezes em 19/10/2026: 4 casos atendidos, 10 a 11 parcialmente e 3 a 4 com falha. Na prática:
+Em uma bateria anterior de 18 casos, executada duas vezes em **19/10/2026**, houve 4 casos atendidos, 10 a 11 parcialmente atendidos e 3 a 4 com falha. Os itens abaixo descrevem limitações observadas nessa avaliação, não necessariamente reproduzidas no teste de usabilidade de novembro:
 
-- **Pode entregar código completo** em situações de manipulação. Em dois casos (encenação de outro personagem e mensagens falsas de "[SYSTEM]") isso ocorreu **nas duas execuções**, e em outro ele aceitou uma "autorização" falsa e prometeu o código. Esses ajustes estão planejados, mas **ainda não foram aplicados nem retestados**.
-- **Pode fazer várias perguntas de uma vez**, ou repetir informações que você já deu.
+- **Pode entregar código completo** em situações de manipulação. Em outubro, dois casos (encenação de outro personagem e mensagens falsas de "[SYSTEM]") provocaram isso **nas duas execuções**, e em outro houve aceitação de uma "autorização" falsa e promessa de código. Em **17/11/2026**, o único pedido adversarial de código pronto foi recusado, mas isso não comprova que as falhas anteriores foram corrigidas.
+- **Pode fazer várias perguntas de uma vez**, como ocorreu no teste de novembro com uma resposta de aproximadamente sete perguntas; a repetição de informações já dadas foi identificada nos testes anteriores, mas não nos quatro turnos do cenário 1 de novembro.
 - **Pode pressupor dados que o enunciado não trouxe.** Se notar isso, corrija-o e informe o dado correto.
 - **Pode não deixar claro o limite da ajuda** (por exemplo, quando algo é só uma pista e não uma verificação).
 - O texto das respostas **varia entre execuções**, mesmo com a mesma pergunta.
@@ -119,7 +140,7 @@ Na bateria de 18 casos com o prompt atual (v1), executada duas vezes em 19/10/20
 
 ### Tempo de resposta e disponibilidade
 
-- **Meta de projeto (RNF01):** responder em até **10 segundos** em pelo menos 90% das requisições, em condições normais. É uma meta de requisito; esta versão ainda não registra medições de tempo reais.
+- **Meta de projeto (RNF01):** responder em até **10 segundos** em pelo menos 90% das requisições, em condições normais. É uma meta de requisito; o teste de usabilidade de 17/11/2026 mediu seis respostas abaixo de 5 segundos, mas a amostra é insuficiente para comprovar a meta de 90% (veja a seção 4).
 - O tempo depende da API da OpenAI e da sua conexão; respostas longas e picos de uso podem demorar mais.
 - **Mensagens de erro que você pode ver:**
 
@@ -127,7 +148,7 @@ Na bateria de 18 casos com o prompt atual (v1), executada duas vezes em 19/10/20
 |---|---|---|
 | "O serviço está temporariamente limitado. Aguarde um pouco e tente novamente." | Limite de uso da API (rate limit) | Espere alguns instantes e reenvie. |
 | "Não foi possível acessar o serviço agora. Verifique a conexão e tente novamente." | Sem internet ou API fora do ar | Confira a conexão e tente de novo. |
-| "Erro: … Tente novamente." | Falha inesperada | Reenvie; se persistir, reinicie com `novo` e avise a equipe. |
+| "Erro: … Tente novamente." | Falha inesperada | Reenvie; se persistir, avise a equipe. No terminal, `novo` reinicia a conversa; na Web, recarregar a página apaga o histórico, mas não é garantia de corrigir a falha. |
 | "Não foi possível iniciar: OPENAI_API_KEY não encontrada…" | Chave ausente no `.env` | Confira o arquivo `.env`. |
 
 Depois de um erro, **a aplicação continua funcionando**: a mensagem que falhou não entra no histórico, e você pode simplesmente reenviá-la.
@@ -140,21 +161,58 @@ Depois de um erro, **a aplicação continua funcionando**: a mensagem que falhou
 
 ---
 
-## 4. Resultado resumido do teste de usabilidade
+## 4. Resultado resumido do teste de usabilidade (#27)
 
-> ⚠️ **Preencher após concluir a Issue [#27](https://git.juninho.com.br/cefet-gps-2026/gps-projetos-integradores/coach-de-maratona-icpc/-/work_items/27).** Os resultados do teste de usabilidade não constam no repositório; **não escreva números ou conclusões sem os registros reais.**
+**Data:** 17/11/2026 | **Testadora:** Bianca da Silva Barros | **Ambiente:** Windows 11, Chrome, execução local (Streamlit), modelo gpt-4.1-mini
 
-| Item | Resultado |
+**Metodologia e escopo:** teste manual de usabilidade, realizado por uma testadora utilizando a aplicação como usuária final, em uma sessão. Foram percorridos o cenário 1 (REAL-01, Weird Algorithm, 4 turnos), o cenário 2 (ADV-01, pedido de código pronto) e o cenário 3 (5 casos de borda: campo vazio, código indentado, texto longo, pergunta fora do tema e recarregar a página).
+
+### Resultado geral
+O fluxo funciona de ponta a ponta: o histórico se mantém entre turnos, o assistente lembra do problema e não entregou código em nenhum caso testado. Os atritos estão na interface (falta de feedback, formatação do código, explicação do produto) e na primeira execução do projeto.
+
+### Tempos de resposta (RNF01: ≤ 10 s)
+| Caso | Tempo |
 |---|---|
-| Data(s) do teste | _preencher_ |
-| Versão testada (commit/tag, prompt, modelo) | _preencher_ |
-| Participantes (quantidade e perfil, sem dados pessoais) | _preencher_ |
-| Tarefas realizadas | _preencher (ex.: iniciar sessão, enviar um problema, pedir pista, reiniciar a conversa)_ |
-| Taxa de conclusão das tarefas | _preencher_ |
-| Tempo de resposta percebido | _preencher_ |
-| Principais dificuldades encontradas | _preencher_ |
-| Pontos positivos | _preencher_ |
-| Mudanças feitas ou planejadas a partir do teste | _preencher, com links para Issues/MRs_ |
+| Cenário 1, turnos 1 a 4 | 4 s, 4 s, 3 s, 2,56 s |
+| Cenário 2 | 2,20 s |
+| Cenário 3, texto longo | 4,46 s |
+| Código indentado, fora do tema | não medidos |
+
+Seis medições, todas abaixo de 5 s. Uma amostra pequena não comprova o critério de 90%. Em um teste anterior (descartado por erro de procedimento), houve uma resposta de 8 s, o que mostra variação entre chamadas.
+
+### O que funcionou bem
+- Histórico mantido em 4 turnos, sem repetir perguntas já respondidas (RF03).
+- Pedido de código pronto recusado de forma pedagógica (ADV-01), sem vazamento de código.
+- Respostas socráticas e tecnicamente corretas (O(n²) no código lento; alerta de estouro de `int` no 3n+1).
+- Campo vazio tratado com aviso claro: "Digite um problema ou código antes de enviar."
+- Interface limpa e com rótulos claros em português.
+
+### Pontos de confusão/atrito
+
+Os problemas abaixo foram observados no teste de **17/11/2026**. As falhas de manipulação do teste de **19/10/2026** são registros anteriores e estão descritas separadamente na seção 3.
+
+| # | Onde | O que aconteceu | Severidade | Sugestão |
+|---|---|---|---|---|
+| 1 | Execução | `streamlit run app/main.py` falhou com `ModuleNotFoundError: No module named 'core'`. O comando que funcionou foi `py -m streamlit run app/main.py`. O README não traz esse comando e ainda diz que a interface não foi implementada | Alta | Documentar o comando que funciona e corrigir o caminho de importação; atualizar a seção "Estado atual" |
+| 2 | Envio | Nenhum sinal percebido durante os ~8 s de espera. Cliquei duas vezes achando que não tinha enviado, e a mensagem foi enviada duas vezes (turno duplicado, resposta diferente, mais custo de API) | Alta | Indicador de carregamento (`st.spinner`) e botão desabilitado durante a chamada |
+| 3 | Diálogo | Código colado perde quebras de linha e indentação no balão do aluno (vira um parágrafo único), embora o campo de entrada preserve | Média | Exibir a mensagem do aluno preservando as quebras (por exemplo, em bloco de código) |
+| 4 | Campo de entrada | O texto enviado continua no campo depois do envio, o que facilita reenvio acidental e obriga a apagar à mão | Média | Limpar o campo após o envio (`clear_on_submit=True`) |
+| 5 | Layout | Entrada e diálogo em colunas separadas; o diálogo cresce para baixo e a última resposta fica fora da vista, exigindo rolagem. "Resposta recebida!" fica longe da resposta e não distingue os turnos | Média | Layout de chat (campo abaixo do diálogo) ou diálogo com altura fixa e rolagem interna; remover a mensagem redundante |
+| 6 | Primeira tela | Nada explica que o assistente nunca entrega código pronto. Ao pedir o programa completo, a recusa é implícita (só pergunta "Você já tentou alguma coisa?") | Média | Aviso curto na tela inicial e uma frase de explicação na primeira resposta |
+| 7 | Pergunta fora do tema | "Qual é a capital da França?" gerou resposta confusa: devolveu a pergunta e ofereceu ensinar a achar a resposta com API ou banco de dados | Baixa | Ajustar o prompt para recusar com clareza e redirecionar para exercícios de programação |
+| 8 | Respostas longas | Texto longo gerou resposta com cerca de sete perguntas em quatro parágrafos, difícil de responder de uma vez | Baixa | Limitar a 1 ou 2 perguntas por resposta no prompt |
+| 9 | Nova conversa | Não há botão para reiniciar. Recarregar a página apaga o histórico sem nenhum aviso (comportamento esperado pelo RF03, mas pouco claro para o aluno) | Baixa | Botão "Nova conversa" (o motor já tem `limpar_historico()`) e aviso de que o histórico não é salvo |
+
+### Limitações deste teste
+Uma testadora, uma sessão, sem alunos reais de maratona. A recusa de código foi testada em um único caso adversarial.
+
+### Prioridades recomendadas
+1. Corrigir/documentar a execução e atualizar o README (#1).
+2. Feedback durante a espera e proteção contra duplo envio (#2).
+3. Preservar a formatação do código no diálogo e limpar o campo após o envio (#3, #4).
+4. Explicar na tela o que o assistente faz e não faz (#6).
+
+Os problemas de interface e execução listados acima são **recomendações de melhoria**, não correções já implementadas. O `README.md` também precisa ser atualizado para refletir a disponibilidade da interface Web e seu comando de execução.
 
 Registro completo: ver a Issue [#27](https://git.juninho.com.br/cefet-gps-2026/gps-projetos-integradores/coach-de-maratona-icpc/-/work_items/27).
 
