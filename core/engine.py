@@ -1,9 +1,9 @@
 import os
 from pathlib import Path
-
+from core.parser import processar_entrada
 from dotenv import load_dotenv
 from openai import OpenAI
-
+from core.errors import mensagem_fallback
 
 # Localiza a raiz do projeto
 RAIZ = Path(__file__).resolve().parent.parent
@@ -31,7 +31,12 @@ class DialogueEngine:
         with open(prompt_path, "r", encoding="utf-8") as arquivo:
             self.system_prompt = arquivo.read()
 
-        self.client = OpenAI(api_key=api_key)
+        self.client = OpenAI(
+            api_key=api_key,
+            timeout=30.0,
+            max_retries=2
+        )
+        
         self.model = model
 
         # O prompt permanece separado do histórico da conversa
@@ -40,10 +45,7 @@ class DialogueEngine:
     def responder(self, pergunta):
         """Envia uma mensagem e mantém o histórico entre os turnos."""
 
-        pergunta = pergunta.strip()
-
-        if not pergunta:
-            raise ValueError("A mensagem não pode estar vazia.")
+        pergunta = processar_entrada(pergunta)
 
         # A mensagem do aluno entra no histórico
         self.messages.append({
@@ -87,8 +89,6 @@ class DialogueEngine:
 if __name__ == "__main__":
     import sys
 
-    from openai import APIConnectionError, RateLimitError
-
     # Uso: python core/engine.py [caminho do prompt]
     prompt = sys.argv[1] if len(sys.argv) > 1 else None
     try:
@@ -113,10 +113,7 @@ if __name__ == "__main__":
             continue
         try:
             print(f"\nMaieut-IA: {motor.responder(pergunta)}")
-        except RateLimitError:
-            print("\nO serviço está temporariamente limitado. Aguarde um pouco e tente novamente.")
-        except APIConnectionError:
-            print("\nNão foi possível acessar o serviço agora. Verifique a conexão e tente novamente.")
+
         except Exception as erro:
-            print(f"\nErro: {type(erro).__name__}. Tente novamente.")
+            print(f"\nMaieut-IA: {mensagem_fallback(erro)}")
             
